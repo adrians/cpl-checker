@@ -1,12 +1,15 @@
+* Install the prerequisites:
 
+```bash
 apt-get install nginx memcached php-memcached php-fpm openjdk-11-jre
+```
 
+* Enable php support in the HTTP server:
 
->> edit the following file
-
+```bash
 vim /etc/nginx/sites-available/default
 
->> and uncomment lines marked with (!)
+# uncomment lines marked with (!)
 
 (!)        location ~ \.php$ {
 (!)                include snippets/fastcgi-php.conf;
@@ -17,9 +20,18 @@ vim /etc/nginx/sites-available/default
         #       fastcgi_pass 127.0.0.1:9000;
 (!)        }
 
->> bump from php7.0-fpm.sock to php7.2-fpm.sock
+# bump the socket name from php7.0-fpm.sock to php7.2-fpm.sock
+```
 
->> chown www-data .
+* Change pemissions on current folder
 
->> service php7.2-fpm restart
->> service nginx restart
+```bash
+chown www-data .
+```
+
+* Reload the configuration:
+
+```bash
+service php7.2-fpm restart
+service nginx restart
+```

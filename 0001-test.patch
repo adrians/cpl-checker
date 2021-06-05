@@ -1,0 +1,78 @@
+From 56ae2d5d5f1096ed7074848f7aec0473447a2416 Mon Sep 17 00:00:00 2001
+From: Adrian Stratulat <adrian.stratulat91@gmail.com>
+Date: Sun, 6 Jun 2021 01:32:56 +0300
+Subject: [PATCH] test
+
+---
+ browser-esm-webpack-small/index.js          | 36 +++++++++++----------
+ browser-esm-webpack-small/webpack.config.js |  2 +-
+ 2 files changed, 20 insertions(+), 18 deletions(-)
+
+diff --git a/browser-esm-webpack-small/index.js b/browser-esm-webpack-small/index.js
+index d414b4a..b022eed 100644
+--- a/browser-esm-webpack-small/index.js
++++ b/browser-esm-webpack-small/index.js
+@@ -104,7 +104,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
+ // import 'monaco-editor/esm/vs/basic-languages/powerquery/powerquery.contribution.js';
+ // import 'monaco-editor/esm/vs/basic-languages/powershell/powershell.contribution.js';
+ // import 'monaco-editor/esm/vs/basic-languages/pug/pug.contribution.js';
+-import 'monaco-editor/esm/vs/basic-languages/python/python.contribution.js';
++// import 'monaco-editor/esm/vs/basic-languages/python/python.contribution.js';
+ // import 'monaco-editor/esm/vs/basic-languages/r/r.contribution.js';
+ // import 'monaco-editor/esm/vs/basic-languages/razor/razor.contribution.js';
+ // import 'monaco-editor/esm/vs/basic-languages/redis/redis.contribution.js';
+@@ -149,20 +149,22 @@ self.MonacoEnvironment = {
+ 	}
+ };
+ 
+-monaco.editor.create(document.getElementById('container'), {
+-	value: [
+-		'from banana import *',
+-		'',
+-		'class Monkey:',
+-		'	# Bananas the monkey can eat.',
+-		'	capacity = 10',
+-		'	def eat(self, N):',
+-		"		'''Make the monkey eat N bananas!'''",
+-		'		capacity = capacity - N*banana.size',
+-		'',
+-		'	def feeding_frenzy(self):',
+-		'		eat(9.25)',
+-		'		return "Yum yum"'
+-	].join('\n'),
+-	language: 'python'
++self.monacoIdeInstanceGrammar = monaco.editor.create(document.getElementById('containerGrammar'), {
++        value: ['grammar Demo;',
++                'ID: [a-z]+ ;',
++                'NUM: [0-9]+ ;',
++                'WS : [ \\t\\n\\r] -> skip ;',
++        ].join('\n'),
++        language: 'text',
++        theme: 'vs-dark',
++        minimap: {enabled: false},
++});
++
++self.monacoIdeInstance = monaco.editor.create(document.getElementById('containerText'), {
++        value: [
++                        'hello world 42 lexer 2020',
++        ].join('\n'),
++        language: 'text',
++        theme: 'vs-dark',
++        minimap: {enabled: false},
+ });
+diff --git a/browser-esm-webpack-small/webpack.config.js b/browser-esm-webpack-small/webpack.config.js
+index 9e9655b..1b8e778 100644
+--- a/browser-esm-webpack-small/webpack.config.js
++++ b/browser-esm-webpack-small/webpack.config.js
+@@ -5,7 +5,7 @@ module.exports = {
+ 	mode: 'production',
+ 	entry: {
+ 		app: './index.js',
+-		'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js'
++		// 'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js'
+ 		// "json.worker": 'monaco-editor/esm/vs/language/json/json.worker',
+ 		// "css.worker": 'monaco-editor/esm/vs/language/css/css.worker',
+ 		// "html.worker": 'monaco-editor/esm/vs/language/html/html.worker',
+-- 
+2.25.1
+
