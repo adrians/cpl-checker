@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+
+<h2>Grammar editor</h2>
+
+<p>
+<ul>
+<li>The grammar <strong>must</strong> be called "Demo". If it's of the "lexer grammar" type it won't work.</li>
+<li>Press the "compile lexer" button and wait 7-8 seconds for the server to compile the lexer and parser.</li>
+<li>The "grammar Demo has no non-fragment rules" error can be ignored.</li>
+<li>If the lexer and the parser were generated correctly, editing and running the lexer should generate output.</li>
+</ul>
+</p>
+
+<div id="containerGrammar" style="width:800px;height:300px;border:1px solid #ccc"></div>
+
+<button onclick="compileLexer()">Compile lexer</button> 
+
+<pre id="build-output" style="color:red;"></pre>
+
+<h2>Example editor</h2>
+<div id="containerText" style="width:800px;height:300px;border:1px solid #ccc"></div>
+
+<script src="./dist/app.bundle.js"></script>
+<script src="./dist/antlr4.js"></script> 
+<script src="main.js"></script> 
+
+<button onclick="runLexer()">Run lexer</button> 
+
+<pre id="run-output" style="color:red;"></pre>
+<p id="output"></p>
+
+</body>
+</html>
